@@ -16,7 +16,7 @@ STOCK_CHANNEL_ID = int(os.getenv("STOCK_CHANNEL_ID"))
 DOC_CYBER_CHANNEL_ID = int(os.getenv("DOC_CYBER_CHANNEL_ID"))
 WRITE_UP_HTB = int(os.getenv("WRITE_UP_HTB"))
 
-# Remplacer RSS_links.RSS_FEEDS par directement RSS_FEEDS dans le code
+
 RSS_FEEDS = {
     "CyberSécurité": {
         "feeds": [
@@ -95,24 +95,23 @@ async def fetch_and_post_news():
     while not client.is_closed():
         for category, data in RSS_FEEDS.items():
             channel = client.get_channel(data["channel_id"])
+
             if channel is None:
                 print(f"Aucun salons trouvé pour {category}")
                 continue
 
             for feed_url in data["feeds"]:
-                try:
                     feed = feedparser.parse(feed_url)
-                    for entry in feed.entries[:3]:  # Limité aux 3 premiers articles
+                    
+                    for entry in feed.entries[:3]: 
                         if entry.link not in posted_links:
                             posted_links.add(entry.link)
                             message = f"**{entry.title}**\n{entry.link}"
                             print(f"[{category}] Articles ajouté: {entry.title}")
+                            
                             await channel.send(message)
-                except Exception as e:
-                    print(f"Erreur lors de la récupération des informations dans les liens {feed_url}: {e}")
 
-        await asyncio.sleep(3600)  # Actualisation toutes les heures
-
+        await asyncio.sleep(3600)  
 @client.event
 async def on_ready():
     print(f"Bot connecté  {client.user}")
