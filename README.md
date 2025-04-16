@@ -23,6 +23,6 @@ Assurez-vous que Python 3.8+ est installé sur votre machine. Vous pouvez télé
 Clonez ce dépôt et installez les dépendances avec pip :
 
 ```bash
-git clone https://github.com/votre-utilisateur/discord-rss-bot.git
+git clone https://github.com/jolanallen/bot-discord-veille.git
 cd discord-rss-bot
 pip install -r requirements.txt
