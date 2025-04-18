@@ -111,7 +111,7 @@ async def fetch_and_post_news():
                             
                             await channel.send(message)
 
-        await asyncio.sleep(3600)  
+        await asyncio.sleep(360)  
 @client.event
 async def on_ready():
     print(f"Bot connecté  {client.user}")
